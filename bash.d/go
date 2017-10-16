@@ -1,0 +1,3 @@
+GOROOT=~/x86/go
+GOPATH=~/x86/mygo
+PATH=~/x86/go/bin:${PATH}

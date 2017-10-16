@@ -1,0 +1,4 @@
+"/usr/bin/xvkbd -text "\C\[Prior]""
+  b:6
+"/usr/bin/xvkbd -text "\C\[Next]""
+  b:7

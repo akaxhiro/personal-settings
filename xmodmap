@@ -1,0 +1,6 @@
+keycode 100 = Control_R
+keycode 102 = Control_L
+keycode 108 = Escape
+
+add control = Control_R
+add control = Control_L

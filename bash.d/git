@@ -1,0 +1,6 @@
+GIT_EDITOR=vi
+#proxy will be determined by http_proxy
+#GIT_PROXY_COMMAND=/home/akashi/bin/git-proxy
+#export GIT_EDITOR GIT_PROXY_COMMAND
+LV=-c
+export LV

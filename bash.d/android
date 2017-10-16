@@ -1,0 +1,11 @@
+# export ANDROID_JAVA_HOME=${JAVA_HOME}
+# export ANDROID_HOME=/opt/android-sdk-linux
+# export ANDROID_HOME=/opt/android/sdk
+# export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+#export ANDROID_HOME=/home/akashi/x86/android/sdk
+
+#ANDROID_ROOT=/home/akashi/x86/android
+#export ANDROID_HOME=${ANDROID_ROOT}/android-sdk-linux
+#export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${ANDROID_ROOT}/android-sdk-linux/bin:{ANDROID_HOME}/build-tools/21.1.2
+
+export PATH=${PATH}:${HOME}/x86/android-studio/bin

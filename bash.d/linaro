@@ -1,0 +1,10 @@
+ARMLMD_LICENSE_FILE=8224@127.0.0.1
+export ARMLMD_LICENSE_FILE
+
+alias aemv8=/home/akashi/arm/armv8/models/RTSM_AEMv8_VE/models/Linux64_GCC-4.1/RTSM_VE_AEMv8A
+alias linaro-flexlm='socksify ssh -L 8224:localhost:8224 -L 18224:localhost:18224 -N takahiro.akashi@flexlm.linaro.org'
+alias cu8173='cu -l /dev/ttyUSB0 -s 921600 --parity=none'
+alias cuhikey='cu -l /dev/ttyUSB0 -s 115200 --parity=none'
+
+export JIRA_USERNAME=takahiro.akashi@linaro.org
+#export JIRA_PASSWORD='****'

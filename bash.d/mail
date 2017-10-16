@@ -1,0 +1,1 @@
+alias mailcheck='tsocks openssl s_client -connect 64.233.188.16:993 -crlf'

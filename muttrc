@@ -1,0 +1,172 @@
+#source "gpg -d ~/.mutt/passwd.gpg |"
+source "echo set smtp_pass=$(gpg --no-tty -q -d ~/.gmailpasswd.gpg) |"
+source "echo set imap_pass=$(gpg --no-tty -q -d ~/.gmailpasswd.gpg) |"
+
+# from http://openwall.info/wiki/internal/email/muttrc,
+# Make Mutt use us-ascii when the content is all 7-bit, otherwise use koi8-r
+set charset="utf-8"
+set send_charset="us-ascii:utf-8"
+#set send_charset="iso-2022-jp:utf-8"
+
+# When viewing and replying to messages that use windows-1251, make Mutt recode
+# them to koi8-r
+charset-hook windows-1251 cp1251
+
+# When replying to or forwarding a message sent to a recognized own address
+# (see above), reuse the same full name and address that the message was
+# addressed to as the new "from" address
+set reverse_name=yes
+
+#set signature=~/.signature
+set realname="AKASHI Takahiro"
+#set from="takahiro.akashi@linaro.org"
+set use_from=yes
+set envelope_from=yes
+# not enabled since passwd is not supplied
+#set sendmail="/usr/local/bin/msmtp -a linaro"
+
+# Aliases
+set alias_file=~/.mutt/aliases
+set sort_alias=alias
+set reverse_alias=yes
+source $alias_file
+
+# Caches
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+# Editting
+set tmpdir="~/tmp"
+set editor="vim -C '+set tw=74 et' '+set spell spelllang=en' '+/^$'"
+set edit_headers
+#set auto_tag=yes
+# See also ~/.vimrc for alias auto completion
+
+# Display
+set index_format="%Z %{%Y-%m-%d %H:%M} %-15.15L %s"
+hdr_order Date: From: User-Agent: X-Mailer \
+		  To: Cc: Reply-To: Subject:
+ignore *
+unignore  Date: From: User-Agent: X-Mailer \
+		  To: Cc: Reply-To: Subject:
+# Disable sorting
+#set sort=mailbox-order
+set sort=threads
+
+set sort_browser=date
+set sort_aux=reverse-last-date-received
+
+# Save one line of the context during scrolling
+set pager_context = 1
+
+# Show 6 lines of message subjects above the message you read
+set pager_index_lines = 6
+
+# Stop at the end of the message, do not jump to the next message
+set pager_stop = yes
+
+# Colors
+color index yellow black "~U"
+color index magenta black "~f akashi@linaro"
+#color status cyan black
+color header red black "^Date:"
+color header yellow black "^Subject:"
+color header white black "^From:"
+color header green black "^To:"
+color header green black "^Cc:"
+color body red black "(ftp|http)://[^ ]+"
+color body green black "[-a-zA-Z0-9_.]+@[-a-zA-Z0-9_.]+"
+color signature red black
+
+# Misc
+set markers
+set smart_wrap
+set pager_context=5
+set pager_index_lines=12
+set status_on_top
+
+#folder pains
+set sidebar_visible=yes
+set sidebar_width=30
+set sidebar_sort=no
+set sidebar_delim='|'
+bind index CP sidebar-prev
+bind index CN sidebar-next
+bind index CO sidebar-open
+bind pager CP sidebar-prev
+bind pager CN sidebar-next
+bind pager CO sidebar-open
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
+bind index B bounce-message
+
+set imap_check_subscribed
+#bind index,pager \CP sidebar-prev
+#bind index,pager \CN sidebar-next
+#bind index,pager \CO sidebar-open
+
+bind index,pager J next-unread
+bind index,pager K previous-unread
+
+#
+# Mailing lists:   Necessary?
+lists private-kwg@linaro.org .*@lists.infradead.org .*@vger.kernel.org
+#subscribe private-kwg@linaro.org linux-arm-kernel@lists.infradead.org linux-kernel@vger.kernel.org
+
+#
+# Accounts
+#
+
+# Automatically log in to this mailbox at startup
+#set spoolfile="imaps://64.233.188.16:993/Inbox"
+set spoolfile="imaps://64.233.188.16:993/[Gmail]/Starred"
+#set spoolfile="imaps://takahiro.akashi@linaro.org@64.233.188.16:993/Inbox"
+#set spoolfile="imaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox"
+#
+# gmail account
+#
+
+set from="takahiro.akashi@linaro.org"
+# not enabled since passwd is not supplied
+#set sendmail="/usr/local/bin/msmtp -a linaro"
+set smtp_url="smtps://takahiro.akashi@linaro.org@64.233.189.16:465"
+set imap_user=takahiro.akashi@linaro.org
+# set imap_pass=
+
+# Define the = shortcut, and the entry point for the folder browser (c?)
+#set folder="imaps://imap.googlemail.com:993/"
+set folder="imaps://64.233.188.16:993/"
+set mbox="=[Gmail]/Starred"
+set record="=[Gmail]/Sent Mail"
+set postponed="=[Gmail]/Drafts"
+set trash="=[Gmail]/Bin"
+
+macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox<Enter>"
+folder-hook imaps://.*imap\.googlemail\.com:993/ source ~/.mutt/gmail
+
+# activate TLS if available on the server
+set ssl_starttls=yes
+# always use SSL when connecting to a server
+set ssl_force_tls=yes
+# Don't wait to enter mailbox manually 
+unset imap_passive        
+# Automatically poll subscribed mailboxes for new mail (new in 1.5.11)
+# set imap_check_subscribed
+# Reduce polling frequency to a sane level
+set mail_check=60
+# And poll the current mailbox more often (not needed with IDLE in post 1.5.11)
+set timeout=20
+# keep a cache of headers for faster loading (1.5.9+?)
+# set header_cache=~/.hcache
+# Display download progress every 5K
+set net_inc=5
+
+
+#
+# bindings
+#
+bind index \t next-unread
+bind pager \t next-unread
+bind index ,\t previous-unread
+bind pager ,\t previous-unread

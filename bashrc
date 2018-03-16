@@ -114,6 +114,8 @@ PATH=~/bin:${PATH}
 LV=-c
 LESS=-R
 
+export LANG PATH LV LESS
+
 alias di='dirs -v'
 alias pu='pushd $*'
 alias po='popd $*'

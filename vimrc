@@ -55,11 +55,11 @@ filetype plugin indent on    " required
 let g:agit_enable_auto_show_commit = 1
 
 " gtags
-"map <C-g> :Gtags 
+map <C-g> :Gtags 
 "map <C-h> :Gtags -f %<CR>
-"map <C-j> :GtagsCursor<CR>
-"map <C-n> :cn<CR>
-"map <C-p> :cp<CR>
+map <C-j> :GtagsCursor<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
 
 " indenting
 " see https://www.cs.oberlin.edu/~kuperman/help/vim/indenting.html
@@ -88,18 +88,33 @@ au BufRead /tmp/mutt* source ~/.mutt/address-search.vim
 " http://stackoverflow.com/questions/5375240/a-more-useful-statusline-in-vim
 set laststatus=2 "always enable status line
 set statusline=
-set statusline +=%1*\ %n\ %*            "buffer number
-set statusline +=%5*%{&ff}%*            "file format
-set statusline +=%3*%y%*                "file type
-set statusline +=%4*\ %<%F%*            "full path
-set statusline +=%2*%m%*                "modified flag
-set statusline +=%1*%=%5l%*             "current line
-set statusline +=%2*/%L%*               "total lines
-set statusline +=%1*%4v\ %*             "virtual column number
-set statusline +=%2*0x%04B\ %*          "character under cursor
+"set statusline +=%=%1*\ %n\ %*            "buffer number
+"set statusline +=%5*%{&ff}%*            "file format
+"set statusline +=%3*%y%*                "file type
+"set statusline +=%4*\ %<%F%*            "full path
+"set statusline +=%2*%m%*                "modified flag
+"set statusline +=%2*%r%*                "modified flag
+""set statusline +=%=%1*%5l%*             "current line
+"set statusline +=%1*%5l%*             "current line
+"set statusline +=%2*/%L%*               "total lines
+"set statusline +=%1*%4v\ %*             "virtual column number
+"set statusline +=%2*0x%04B\ %*          "character under cursor
+set statusline +=\ %n\ %*            "buffer number
+set statusline +=%{&ff}%*            "file format
+set statusline +=%y%*                "file type
+set statusline +=\ %<%F%*            "full path
+set statusline +=%m%*                "modified flag
+set statusline +=%r%*                "modified flag
+set statusline +=%=%5l%*             "current line
+set statusline +=/%L%*               "total lines
+set statusline +=%4v\ %*             "virtual column number
+set statusline +=0x%04B\ %*          "character under cursor
 
 hi clear StatusLine
-hi StatusLine ctermfg=black ctermbg=white
+"hi StatusLine ctermfg=black ctermbg=white
+hi StatusLine ctermfg=black ctermbg=green
+hi StatusLineNC term=reverse ctermfg=red ctermbg=white
+"Color scheme
 hi User1 guifg=#eea040 guibg=#222222
 hi User2 guifg=#dd3333 guibg=#222222
 hi User3 guifg=#ff66ff guibg=#222222

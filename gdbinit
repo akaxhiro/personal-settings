@@ -1,4 +1,5 @@
 set history save on
+set listsize 40
 #source ~/arm/armv8/linaro/misc/security/gdbinit-gef.py
 
 #

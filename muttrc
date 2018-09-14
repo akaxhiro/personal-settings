@@ -1,6 +1,6 @@
 #source "gpg -d ~/.mutt/passwd.gpg |"
-source "echo set smtp_pass=$(gpg --no-tty -q -d ~/.gmailpasswd.gpg) |"
-source "echo set imap_pass=$(gpg --no-tty -q -d ~/.gmailpasswd.gpg) |"
+source "echo set smtp_pass=$(gpg2 --no-tty -q -d ~/.gmailpasswd.gpg) |"
+source "echo set imap_pass=$(gpg2 --no-tty -q -d ~/.gmailpasswd.gpg) |"
 
 # from http://openwall.info/wiki/internal/email/muttrc,
 # Make Mutt use us-ascii when the content is all 7-bit, otherwise use koi8-r

@@ -1,0 +1,2 @@
+# 32:green, 33:yellow
+export GREP_COLORS=fn=32:ln=33

@@ -121,6 +121,7 @@ alias pu='pushd $*'
 alias po='popd $*'
 
 alias psl='ps -lmL'
+alias gpg=gpg2
 
 # Socks setup
 . ~/.bash.d/socks

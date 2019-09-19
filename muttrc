@@ -142,7 +142,8 @@ set record="=[Gmail]/Sent Mail"
 set postponed="=[Gmail]/Drafts"
 set trash="=[Gmail]/Bin"
 
-macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox<Enter>"
+#macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox<Enter>"
+macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/[Gmail]/Starred<Enter>"
 folder-hook imaps://.*imap\.googlemail\.com:993/ source ~/.mutt/gmail
 
 # activate TLS if available on the server

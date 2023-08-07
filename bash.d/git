@@ -4,3 +4,6 @@ GIT_EDITOR=vi
 #export GIT_EDITOR GIT_PROXY_COMMAND
 LV=-c
 export LV
+
+# https://salferrarello.com/using-vim-view-git-commits/
+alias glog='git log --max-count=200 | vim -R -c "set filetype=git nowrap" -'

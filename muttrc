@@ -1,10 +1,13 @@
 #source "gpg -d ~/.mutt/passwd.gpg |"
-source "echo set smtp_pass=$(gpg2 --no-tty -q -d ~/.gmailpasswd.gpg) |"
-source "echo set imap_pass=$(gpg2 --no-tty -q -d ~/.gmailpasswd.gpg) |"
+#source "echo set smtp_pass=$(gpg2 --no-tty -q -d ~/.gmailpasswd.gpg) |"
+#source "echo set imap_pass=$(gpg2 --no-tty -q -d ~/.gmailpasswd.gpg) |"
+set smtp_pass=aqcpdvckgqleqaqe
+set imap_pass=aqcpdvckgqleqaqe
 
 # from http://openwall.info/wiki/internal/email/muttrc,
 # Make Mutt use us-ascii when the content is all 7-bit, otherwise use koi8-r
 set charset="utf-8"
+#set assumed_charset="utf-8:iso-2022-jp:euc-jp:shift_jis"
 set send_charset="us-ascii:utf-8"
 #set send_charset="iso-2022-jp:utf-8"
 
@@ -44,7 +47,8 @@ set edit_headers
 # See also ~/.vimrc for alias auto completion
 
 # Display
-set index_format="%Z %{%Y-%m-%d %H:%M} %-15.15L %s"
+#set index_format="%Z %{%Y-%m-%d %H:%M} %-15.15L %s"
+set index_format="%Z %[%y-%m-%d %H:%M] %-15.15L %s"
 hdr_order Date: From: User-Agent: X-Mailer \
 		  To: Cc: Reply-To: Subject:
 ignore *
@@ -67,17 +71,31 @@ set pager_index_lines = 6
 set pager_stop = yes
 
 # Colors
+source /home/akashi/x86/mutt/contrib/colors.linux
+# overrides
+#color hdrdefault brightgreen black
+color status black brightgreen
+color signature red black
+color prompt yellow black
+color indicator black white
+
 color index yellow black "~U"
 color index magenta black "~f akashi@linaro"
+
+# collapsed threads
+color index yellow  default "~v~(!~N)~(!~F)" # with no New or Flagged
+color index red     default "~v~(~F)~(!~N)"  # with Flagged but no New
+color index green   default "~v~(~N)"        # with New
+
 #color status cyan black
-color header red black "^Date:"
+color header blue black "^Date:"
 color header yellow black "^Subject:"
 color header white black "^From:"
 color header green black "^To:"
 color header green black "^Cc:"
 color body red black "(ftp|http)://[^ ]+"
 color body green black "[-a-zA-Z0-9_.]+@[-a-zA-Z0-9_.]+"
-color signature red black
+
 
 # Misc
 set markers
@@ -88,9 +106,13 @@ set status_on_top
 
 #folder pains
 set sidebar_visible=yes
-set sidebar_width=30
-set sidebar_sort=no
-set sidebar_delim='|'
+set sidebar_width=50
+set sidebar_sort_method=unsorted
+set sidebar_delim_chars='|'
+#set sidebar_new_mail_only=yes
+set sidebar_folder_indent=yes
+set sidebar_format='%B%* %N'
+#set sidebar_format='%N'
 bind index CP sidebar-prev
 bind index CN sidebar-next
 bind index CO sidebar-open
@@ -110,40 +132,36 @@ bind index,pager J next-unread
 bind index,pager K previous-unread
 
 #
-# Mailing lists:   Necessary?
-lists private-kwg@linaro.org .*@lists.infradead.org .*@vger.kernel.org
-#subscribe private-kwg@linaro.org linux-arm-kernel@lists.infradead.org linux-kernel@vger.kernel.org
+# Mailing lists: for %F/%L
+lists private-kwg@linaro.org .*@lists.infradead.org .*@vger.kernel.org .*@lists.denx.de .*@lists.openwall.com
+# not very useful
+#subscribe private-kwg@linaro.org linux-arm-kernel@lists.infradead.org linux-kernel@vger.kernel.org u-boot@lists.denx.de kernel-hardening@lists.openwall.com
 
 #
 # Accounts
 #
 
+# top folder for listing
+#set spoolfile="imaps://64.233.188.16:993/"
+set folder="imaps://imap.gmail.com:993/"
+
 # Automatically log in to this mailbox at startup
-#set spoolfile="imaps://64.233.188.16:993/Inbox"
-set spoolfile="imaps://64.233.188.16:993/[Gmail]/Starred"
-#set spoolfile="imaps://takahiro.akashi@linaro.org@64.233.188.16:993/Inbox"
-#set spoolfile="imaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox"
-#
-# gmail account
-#
-
-set from="takahiro.akashi@linaro.org"
-# not enabled since passwd is not supplied
-#set sendmail="/usr/local/bin/msmtp -a linaro"
-set smtp_url="smtps://takahiro.akashi@linaro.org@64.233.189.16:465"
-set imap_user=takahiro.akashi@linaro.org
-# set imap_pass=
-
-# Define the = shortcut, and the entry point for the folder browser (c?)
-#set folder="imaps://imap.googlemail.com:993/"
-set folder="imaps://64.233.188.16:993/"
+set spoolfile=+[Gmail]/Starred
+# default folder
 set mbox="=[Gmail]/Starred"
 set record="=[Gmail]/Sent Mail"
 set postponed="=[Gmail]/Drafts"
 set trash="=[Gmail]/Bin"
+# regularly checked folders
+mailboxes =Inbox =[Gmail]/Starred
 
-macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox<Enter>"
-folder-hook imaps://.*imap\.googlemail\.com:993/ source ~/.mutt/gmail
+# not enabled since passwd is not supplied
+#set sendmail="/usr/local/bin/msmtp -a linaro"
+#set smtp_url="smtps://takahiro.akashi@linaro.org@64.233.189.16:465"
+set smtp_url="smtps://takahiro.akashi@linaro.org@smtp.gmail.com:465"
+set from="takahiro.akashi@linaro.org"
+set imap_user=takahiro.akashi@linaro.org
+# set imap_pass=
 
 # activate TLS if available on the server
 set ssl_starttls=yes
@@ -170,3 +188,33 @@ bind index \t next-unread
 bind pager \t next-unread
 bind index ,\t previous-unread
 bind pager ,\t previous-unread
+
+#macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.googlemail.com:993/Inbox<Enter>"
+#folder-hook imaps://.*imap\.googlemail\.com:993/ source ~/.mutt/gmail
+macro index \cxg "cimaps://takahiro.akashi@linaro.org@imap.gmail.com:993/<Enter>"
+
+
+#
+# PGP
+# https://stackoverflow.com/questions/49332245/cant-reply-to-email-via-mutt-with-gnupg-asks-for-keyid
+
+# Use GPGME
+set crypt_use_gpgme = yes
+
+# Sign replies to signed emails
+set crypt_replysign = yes
+
+# Encrypt replies to encrypted emails
+set crypt_replyencrypt = yes
+
+# Encrypt and sign replies to encrypted and signed email
+set crypt_replysignencrypted = yes
+
+# Attempt to verify signatures automatically
+set crypt_verify_sig = yes
+
+# Use my key for signing and encrypting
+# set pgp_sign_as = 0x53445200
+
+# Automatically sign all out-going email
+# set crypt_autosign = yes

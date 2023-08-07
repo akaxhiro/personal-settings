@@ -5,6 +5,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
+" run :PluginUpdate after adding any plugin
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
@@ -19,6 +20,7 @@ Plugin 'gmarik/Vundle.vim'
 " well-known git frontend
 Plugin 'tpope/vim-fugitive'
 " git log viewer
+Plugin 'junegunn/gv.vim'
 Plugin 'cohama/agit.vim'
 Plugin 'https://github.com/Shougo/unite.vim.git'
 Plugin 'git://github.com/kmnk/vim-unite-giti.git'
@@ -120,8 +122,16 @@ hi User2 guifg=#dd3333 guibg=#222222
 hi User3 guifg=#ff66ff guibg=#222222
 hi User4 guifg=#a0ee40 guibg=#222222
 hi User5 guifg=#eeee40 guibg=#222222
+" Cursorline
+" set cursorline
+hi cursorline ctermfg=black ctermbg=grey
 
 " PDF viewer
 " http://vim.wikia.com/wiki/Open_PDF_files
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> -
 :command! -complete=file -nargs=1 Rpdf :r !pdftotext -nopgbrk <q-args> - |fmt -csw78
+
+" Local language
+set encoding=utf-8
+set fileencodings=utf-8,euc-jp,sjis,iso-2022-jp
+set fileformats=unix,dos,mac

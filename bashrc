@@ -108,9 +108,12 @@ fi
 # by aka
 ########
 export LANG=C
+#export LANG=ja_JP.UTF-8
+#export LC_CTYPE=ja_JP.UTF-8
+export LESSCHARSET=utf-8
 
 #
-PATH=~/bin:${PATH}
+PATH=~/.local/bin:~/bin:${PATH}
 LV=-c
 LESS=-R
 
@@ -137,3 +140,4 @@ alias gpg=gpg2
 
 # Linaro setup
 . ~/.bash.d/linaro
+. "$HOME/.cargo/env"

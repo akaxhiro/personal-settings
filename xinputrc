@@ -1,3 +1,3 @@
-# im-config(8) generated on Tue, 05 Apr 2016 16:39:04 +0900
-run_im default
-# im-config signiture: 03bf22944df3afda41d5eaf4173f32dd  -
+# im-config(8) generated on Sat, 20 May 2023 13:16:56 +0900
+run_im ibus
+# im-config signature: 77d9ce3f377675990d46c5f0780c9997  -

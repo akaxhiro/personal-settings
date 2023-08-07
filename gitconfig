@@ -1,0 +1,24 @@
+[user]
+	email = takahiro.akashi@linaro.org
+	name = AKASHI Takahiro
+[core]
+	editor = vi
+	pager = less
+	quotepath = false
+	abbrev = 12
+[log]
+	abbrevCommit = true
+[format]
+	pretty = oneline
+[sendemail]
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 465
+	smtpEncryption = ssl
+	smtpUser = takahiro.akashi@linaro.org
+	smtpPass = aqcpdvckgqleqaqe
+[color]
+	ui = auto
+#[url "https://git.qemu-project.org"]
+#	insteadOf = git://git.qemu-project.org
+#[url "https://git.qemu.org"]
+#	insteadOf = git://git.qemu.org
